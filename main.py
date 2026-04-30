@@ -1,3 +1,8 @@
+"""
+Main module for the AutoEmail application.
+Orchestrates reading emails, detecting phishing, and generating summaries and replies.
+"""
+import io
 import sys
 from gmail_service import get_gmail_service, get_unread_emails, get_email_content
 from phishing_detector import is_phishing
@@ -5,8 +10,11 @@ from summarizer import summarize_email
 from reply_generator import generate_reply
 
 def main():
+    """
+    Main entry point for the script.
+    Authenticates, fetches unread emails, and processes each one.
+    """
     if hasattr(sys.stdout, 'buffer'):
-        import io
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     
     service = get_gmail_service()
