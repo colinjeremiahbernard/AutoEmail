@@ -57,11 +57,13 @@ class EmailAnalyzer:
             score = sum(1 for keyword in keywords if keyword in email_lower)
             category_scores[category] = score
         
-        # Return category with highest score, default to WORK if no matches
+        # Return category with highest score, default to GENERAL if no matches
         if max(category_scores.values()) == 0:
             return 'GENERAL'
         
-        return max(category_scores, key=category_scores.get)
+        # Find category with highest score
+        max_category = max(category_scores.items(), key=lambda x: x[1])
+        return max_category[0]
     
     def calculate_priority_score(self, email_text: str, subject: str = "") -> Tuple[int, str]:
         """
